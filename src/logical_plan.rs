@@ -113,7 +113,7 @@ impl Projection {
 
 pub struct Selection {
     input: Arc<dyn LogicalPlan>,
-    expr: Box<dyn LogicalExpression>,
+    expr: Arc<dyn LogicalExpression>,
 }
 
 impl LogicalPlan for Selection {
@@ -131,24 +131,29 @@ impl LogicalPlan for Selection {
 }
 
 impl Selection {
-    pub fn new(input: Arc<dyn LogicalPlan>, expr: Box<dyn LogicalExpression>) -> Selection {
+    pub fn new(input: Arc<dyn LogicalPlan>, expr: Arc<dyn LogicalExpression>) -> Selection {
         Selection { input, expr }
     }
 }
 
 pub struct Aggregate {
     input: Arc<dyn LogicalPlan>,
-    groupexpr: Vec<Box<dyn LogicalExpression>>,
-    aggregateexpr: Vec<Box<AggregateExpression>>,
+    groupexpr: Vec<Arc<dyn LogicalExpression>>,
+    aggregateexpr: Vec<Arc<AggregateExpression>>,
 }
 
 impl LogicalPlan for Aggregate {
     fn schema(&self) -> Arc<Schema> {
-        let fields: Vec<Field> = self
+        let mut fields: Vec<Field> = self
             .groupexpr
             .iter()
             .map(|g| g.to_field(Arc::clone(&self.input)))
             .collect();
+        fields.extend(
+            self.aggregateexpr
+                .iter()
+                .map(|g| g.to_field(Arc::clone(&self.input))),
+        );
         Arc::new(Schema::new(fields))
     }
 
@@ -176,8 +181,8 @@ impl LogicalPlan for Aggregate {
 impl Aggregate {
     pub fn new(
         input: Arc<dyn LogicalPlan>,
-        groupexpr: Vec<Box<dyn LogicalExpression>>,
-        aggregateexpr: Vec<Box<AggregateExpression>>,
+        groupexpr: Vec<Arc<dyn LogicalExpression>>,
+        aggregateexpr: Vec<Arc<AggregateExpression>>,
     ) -> Aggregate {
         Aggregate {
             input,

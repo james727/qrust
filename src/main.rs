@@ -1,4 +1,4 @@
-use crate::builder::builder::*;
+use crate::builder::*;
 use crate::context::ExecutionContext;
 use arrow::datatypes::DataType;
 

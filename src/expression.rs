@@ -64,7 +64,7 @@ impl LogicalExpression for LiteralStringExpression {
     }
 
     fn to_string(&self) -> String {
-        format!("'${}'", self.val)
+        format!("'{}'", self.val)
     }
 }
 
@@ -309,27 +309,27 @@ impl LogicalExpression for AggregateExpression {
 }
 
 impl AggregateExpression {
-    fn sum(input: Arc<dyn LogicalExpression>) -> AggregateExpression {
+    pub fn sum(input: Arc<dyn LogicalExpression>) -> AggregateExpression {
         AggregateExpression {
-            name: "SUM".to_owned(),
+            name: "sum".to_owned(),
             expr: input,
         }
     }
-    fn min(input: Arc<dyn LogicalExpression>) -> AggregateExpression {
+    pub fn min(input: Arc<dyn LogicalExpression>) -> AggregateExpression {
         AggregateExpression {
-            name: "MIN".to_owned(),
+            name: "min".to_owned(),
             expr: input,
         }
     }
-    fn max(input: Arc<dyn LogicalExpression>) -> AggregateExpression {
+    pub fn max(input: Arc<dyn LogicalExpression>) -> AggregateExpression {
         AggregateExpression {
-            name: "MAX".to_owned(),
+            name: "max".to_owned(),
             expr: input,
         }
     }
-    fn avg(input: Arc<dyn LogicalExpression>) -> AggregateExpression {
+    pub fn avg(input: Arc<dyn LogicalExpression>) -> AggregateExpression {
         AggregateExpression {
-            name: "AVG".to_owned(),
+            name: "avg".to_owned(),
             expr: input,
         }
     }
