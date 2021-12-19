@@ -247,40 +247,46 @@ impl BinaryExpression for MathExpression {
 }
 
 impl MathExpression {
-    fn add(l: Arc<dyn LogicalExpression>, r: Arc<dyn LogicalExpression>) -> BooleanExpression {
-        BooleanExpression {
+    pub fn add(l: Arc<dyn LogicalExpression>, r: Arc<dyn LogicalExpression>) -> MathExpression {
+        MathExpression {
             name: "add".to_owned(),
             op: "+".to_owned(),
             l,
             r,
         }
     }
-    fn subtract(l: Arc<dyn LogicalExpression>, r: Arc<dyn LogicalExpression>) -> BooleanExpression {
-        BooleanExpression {
+    pub fn subtract(
+        l: Arc<dyn LogicalExpression>,
+        r: Arc<dyn LogicalExpression>,
+    ) -> MathExpression {
+        MathExpression {
             name: "subtract".to_owned(),
             op: "-".to_owned(),
             l,
             r,
         }
     }
-    fn multiply(l: Arc<dyn LogicalExpression>, r: Arc<dyn LogicalExpression>) -> BooleanExpression {
-        BooleanExpression {
+    pub fn multiply(
+        l: Arc<dyn LogicalExpression>,
+        r: Arc<dyn LogicalExpression>,
+    ) -> MathExpression {
+        MathExpression {
             name: "mult".to_owned(),
             op: "*".to_owned(),
             l,
             r,
         }
     }
-    fn divide(l: Arc<dyn LogicalExpression>, r: Arc<dyn LogicalExpression>) -> BooleanExpression {
-        BooleanExpression {
+    pub fn divide(l: Arc<dyn LogicalExpression>, r: Arc<dyn LogicalExpression>) -> MathExpression {
+        MathExpression {
             name: "div".to_owned(),
             op: "/".to_owned(),
             l,
             r,
         }
     }
-    fn modulus(l: Arc<dyn LogicalExpression>, r: Arc<dyn LogicalExpression>) -> BooleanExpression {
-        BooleanExpression {
+    pub fn modulus(l: Arc<dyn LogicalExpression>, r: Arc<dyn LogicalExpression>) -> MathExpression {
+        MathExpression {
             name: "modulus".to_owned(),
             op: "%".to_owned(),
             l,
