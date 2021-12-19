@@ -63,7 +63,7 @@ mod tests {
             ("column2", DataType::Int64, false),
             ("column3", DataType::Int64, false),
         ]);
-        let path = String::from("test.csv");
+        let path = "test.csv";
         Arc::new(context.csv(Arc::clone(&schema), path))
     }
 

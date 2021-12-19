@@ -17,7 +17,7 @@ fn main() {
         ("column2", DataType::Int64, false),
         ("column3", DataType::Int64, false),
     ]);
-    let path = String::from("test.csv");
+    let path = "test.csv";
 
     let df = context
         .csv(schema, path)

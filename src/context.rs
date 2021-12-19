@@ -10,10 +10,10 @@ impl ExecutionContext {
         ExecutionContext {}
     }
 
-    pub fn csv(&self, schema: Arc<Schema>, path: String) -> DataFrame {
-        let source = CsvDataSource::new(Arc::clone(&schema), path.clone());
+    pub fn csv(&self, schema: Arc<Schema>, path: &str) -> DataFrame {
+        let source = CsvDataSource::new(Arc::clone(&schema), String::from(path));
         DataFrame::new(Arc::new(Scan::new(
-            path,
+            String::from(path),
             Arc::clone(&schema),
             Box::new(source),
             vec![],
