@@ -50,18 +50,17 @@ impl DataFrame {
 
 #[cfg(test)]
 mod tests {
-    use arrow::datatypes::DataType;
-
     use super::*;
+    use crate::core::data_type::ArrowType;
     use crate::core::execution_context::ExecutionContext;
     use crate::core::helper::*;
 
     fn generate_df() -> Arc<DataFrame> {
         let context = ExecutionContext::new();
         let schema = schema(vec![
-            ("column1", DataType::Int64, false),
-            ("column2", DataType::Int64, false),
-            ("column3", DataType::Int64, false),
+            ("column1", ArrowType::Int64Type, false),
+            ("column2", ArrowType::Int64Type, false),
+            ("column3", ArrowType::Int64Type, false),
         ]);
         let path = "test.csv";
         Arc::new(context.csv(Arc::clone(&schema), path))
@@ -87,9 +86,9 @@ mod tests {
         assert_eq!(
             df.schema(),
             schema(vec![
-                ("column1", DataType::Int64, false),
-                ("column2", DataType::Int64, false),
-                ("column3", DataType::Int64, false),
+                ("column1", ArrowType::Int64Type, false),
+                ("column2", ArrowType::Int64Type, false),
+                ("column3", ArrowType::Int64Type, false),
             ])
         );
 
@@ -103,8 +102,8 @@ mod tests {
         assert_eq!(
             df.schema(),
             schema(vec![
-                ("column1", DataType::Int64, false),
-                ("column3", DataType::Int64, false),
+                ("column1", ArrowType::Int64Type, false),
+                ("column3", ArrowType::Int64Type, false),
             ])
         );
 
@@ -122,9 +121,9 @@ mod tests {
         assert_eq!(
             df.schema(),
             schema(vec![
-                ("column1", DataType::Int64, false),
-                ("column2", DataType::Int64, false),
-                ("column3", DataType::Int64, false),
+                ("column1", ArrowType::Int64Type, false),
+                ("column2", ArrowType::Int64Type, false),
+                ("column3", ArrowType::Int64Type, false),
             ])
         );
 
@@ -142,8 +141,8 @@ mod tests {
         assert_eq!(
             df.schema(),
             schema(vec![
-                ("column1", DataType::Int64, false),
-                ("sum", DataType::Int64, false),
+                ("column1", ArrowType::Int64Type, false),
+                ("sum", ArrowType::Int64Type, false),
             ])
         );
 

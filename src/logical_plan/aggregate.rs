@@ -61,9 +61,8 @@ impl Aggregate {
 
 #[cfg(test)]
 mod tests {
-    use arrow::datatypes::DataType;
-
     use super::*;
+    use crate::core::data_type::ArrowType;
     use crate::core::{execution_context::ExecutionContext, helper::*};
 
     #[test]
@@ -71,8 +70,8 @@ mod tests {
         let ctx = ExecutionContext::new();
         let input = ctx.csv(
             schema(vec![
-                ("abc", DataType::Utf8, false),
-                ("values", DataType::Int64, false),
+                ("abc", ArrowType::StringType, false),
+                ("values", ArrowType::Int64Type, false),
             ]),
             "path.csv",
         );
@@ -88,8 +87,8 @@ mod tests {
         assert_eq!(
             expr.schema(),
             schema(vec![
-                ("abc", DataType::Utf8, false),
-                ("sum", DataType::Int64, false),
+                ("abc", ArrowType::StringType, false),
+                ("values", ArrowType::Int64Type, false),
             ])
         )
     }

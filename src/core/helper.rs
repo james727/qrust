@@ -1,7 +1,8 @@
 use arrow::datatypes::{DataType, Field, Schema};
-
-use crate::logical_plan::expression::*;
 use std::sync::Arc;
+
+use super::data_type::ArrowType;
+use crate::logical_plan::expression::*;
 
 /// Helper function for generating an Arrow schema from a vector of tuples.
 ///
@@ -15,15 +16,15 @@ use std::sync::Arc;
 /// # Example
 /// ```
 /// let schema = schema(vec![
-///   ("col1", DataType::Int64, false),
-///   ("col2", DataType::Int64, false),
+///   ("col1", ArrowType::Int64, false),
+///   ("col2", ArrowType::Int64, false),
 /// ]);
 /// ```
-pub fn schema(fields: Vec<(&str, DataType, bool)>) -> Arc<Schema> {
+pub fn schema(fields: Vec<(&str, ArrowType, bool)>) -> Arc<Schema> {
     Arc::new(Schema::new(
         fields
             .iter()
-            .map(move |(n, t, z)| Field::new(n, t.clone(), z.clone()))
+            .map(move |(n, t, z)| Field::new(n, DataType::from(*t), z.clone()))
             .collect(),
     ))
 }

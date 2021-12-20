@@ -5,6 +5,13 @@ This is a toy project I put together to learn Rust. It's not intended for produc
 
 # Example
 ```rust
+use crate::core::data_type::ArrowType;
+use crate::core::execution_context::ExecutionContext;
+use crate::core::helper::*;
+
+mod core;
+mod logical_plan;
+mod physical_plan;
 
 fn main() {
     // Create a context for running queries.
@@ -12,9 +19,9 @@ fn main() {
 
     // Define the source file and schema.
     let schema = schema(vec![
-        ("column1", DataType::Int64, false),
-        ("column2", DataType::Int64, false),
-        ("column3", DataType::Int64, false),
+        ("column1", ArrowType::Int64Type, false),
+        ("column2", ArrowType::Int64Type, false),
+        ("column3", ArrowType::Int64Type, false),
     ]);
     let path = "test.csv";
 
