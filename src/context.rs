@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use arrow::datatypes::Schema;
 
-use crate::{data_frame::DataFrame, data_source::CsvDataSource, logical_plan::Scan};
+use crate::{data_frame::DataFrame, data_source::CsvDataSource, logical_plan::scan::*};
 pub struct ExecutionContext {}
 
 impl ExecutionContext {

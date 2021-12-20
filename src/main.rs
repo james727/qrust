@@ -6,7 +6,6 @@ mod builder;
 mod context;
 mod data_frame;
 mod data_source;
-mod expression;
 mod logical_plan;
 
 fn main() {

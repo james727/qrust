@@ -1,4 +1,4 @@
-use crate::logical_plan::LogicalPlan;
+use super::*;
 
 use arrow::datatypes::{DataType, Field};
 use std::{panic, sync::Arc};
@@ -39,21 +39,6 @@ impl ColumnExpression {
     }
 }
 
-pub trait IntoLit {
-    fn into_lit(&self) -> Arc<dyn LogicalExpression>;
-}
-
-impl IntoLit for i64 {
-    fn into_lit(&self) -> Arc<dyn LogicalExpression> {
-        Arc::new(LiteralI64Expression::new(*self))
-    }
-}
-
-impl IntoLit for &str {
-    fn into_lit(&self) -> Arc<dyn LogicalExpression> {
-        Arc::new(LiteralStringExpression::new(String::from(*self)))
-    }
-}
 pub struct LiteralStringExpression {
     val: String,
 }

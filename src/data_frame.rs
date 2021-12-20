@@ -2,10 +2,11 @@ use std::sync::Arc;
 
 use arrow::datatypes::Schema;
 
-use crate::{
-    expression::{AggregateExpression, LogicalExpression},
-    logical_plan::{Aggregate, LogicalPlan, Projection, Selection},
-};
+use crate::logical_plan::aggregate::*;
+use crate::logical_plan::expression::*;
+use crate::logical_plan::projection::*;
+use crate::logical_plan::selection::*;
+use crate::logical_plan::*;
 
 pub struct DataFrame {
     plan: Arc<dyn LogicalPlan>,

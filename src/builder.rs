@@ -1,6 +1,6 @@
 use arrow::datatypes::{DataType, Field, Schema};
 
-use crate::expression::*;
+use crate::logical_plan::expression::*;
 use std::sync::Arc;
 
 /// Helper function for generating an Arrow schema from a vector of tuples.
@@ -31,6 +31,24 @@ pub fn schema(fields: Vec<(&str, DataType, bool)>) -> Arc<Schema> {
 /// Generate a column expression from a column name.
 pub fn col(name: &str) -> Arc<ColumnExpression> {
     Arc::new(ColumnExpression::new(String::from(name)))
+}
+
+/// Helper trait for converting values into literal expressions.
+/// :TODO: Implement for more types than string/i64.
+pub trait IntoLit {
+    fn into_lit(&self) -> Arc<dyn LogicalExpression>;
+}
+
+impl IntoLit for i64 {
+    fn into_lit(&self) -> Arc<dyn LogicalExpression> {
+        Arc::new(LiteralI64Expression::new(*self))
+    }
+}
+
+impl IntoLit for &str {
+    fn into_lit(&self) -> Arc<dyn LogicalExpression> {
+        Arc::new(LiteralStringExpression::new(String::from(*self)))
+    }
 }
 
 /// Generate a literal expression from a value reference that implements the `IntoLit` trait.
