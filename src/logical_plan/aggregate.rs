@@ -58,3 +58,39 @@ impl Aggregate {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use arrow::datatypes::DataType;
+
+    use super::*;
+    use crate::core::{execution_context::ExecutionContext, helper::*};
+
+    #[test]
+    fn test_aggregate() {
+        let ctx = ExecutionContext::new();
+        let input = ctx.csv(
+            schema(vec![
+                ("abc", DataType::Utf8, false),
+                ("values", DataType::Int64, false),
+            ]),
+            "path.csv",
+        );
+        let group: Vec<Arc<dyn LogicalExpression>> = vec![col("abc")];
+        let agg = vec![sum(col("values"))];
+        let expr = Aggregate::new(input.plan(), group, agg);
+
+        assert_eq!(
+            expr.to_string().as_str(),
+            "Aggregate: groupExpr=abc, aggregateExpr=sum(values)"
+        );
+
+        assert_eq!(
+            expr.schema(),
+            schema(vec![
+                ("abc", DataType::Utf8, false),
+                ("sum", DataType::Int64, false),
+            ])
+        )
+    }
+}
