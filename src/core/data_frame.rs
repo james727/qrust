@@ -6,7 +6,7 @@ use crate::logical_plan::aggregate::*;
 use crate::logical_plan::expression::*;
 use crate::logical_plan::projection::*;
 use crate::logical_plan::selection::*;
-use crate::logical_plan::*;
+use crate::logical_plan::LogicalPlan;
 
 pub struct DataFrame {
     plan: Arc<dyn LogicalPlan>,
@@ -52,10 +52,9 @@ impl DataFrame {
 mod tests {
     use arrow::datatypes::DataType;
 
-    use crate::builder::*;
-    use crate::context::ExecutionContext;
-
     use super::*;
+    use crate::core::execution_context::ExecutionContext;
+    use crate::core::helper::*;
 
     fn generate_df() -> Arc<DataFrame> {
         let context = ExecutionContext::new();

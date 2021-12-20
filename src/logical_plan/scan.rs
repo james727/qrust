@@ -1,5 +1,5 @@
 use super::*;
-use crate::data_source::DataSource;
+use crate::core::data_source::DataSource;
 
 pub struct Scan {
     path: String,

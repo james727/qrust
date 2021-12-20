@@ -1,11 +1,9 @@
-use crate::builder::*;
-use crate::context::ExecutionContext;
 use arrow::datatypes::DataType;
 
-mod builder;
-mod context;
-mod data_frame;
-mod data_source;
+use crate::core::execution_context::*;
+use crate::core::helper::*;
+
+mod core;
 mod logical_plan;
 
 fn main() {

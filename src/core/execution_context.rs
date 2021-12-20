@@ -1,8 +1,10 @@
+use arrow::datatypes::Schema;
 use std::sync::Arc;
 
-use arrow::datatypes::Schema;
+use super::data_frame::DataFrame;
+use super::data_source::CsvDataSource;
+use crate::logical_plan::scan::*;
 
-use crate::{data_frame::DataFrame, data_source::CsvDataSource, logical_plan::scan::*};
 pub struct ExecutionContext {}
 
 impl ExecutionContext {
