@@ -3,6 +3,12 @@ Qrust is an in-memory query engine inspired by https://github.com/apache/arrow-d
 
 This is a toy project I put together to learn Rust. It's not intended for production use. If you need something like this for anything important, just use Datafusion instead.
 
+# TODOs
+This project is not complete. Remaining items include:
+- [ ] Implement physical plan operations (i.e. actually run queries)
+- [ ] Add optimizer passes, probably starting with projection pushdown
+- [ ] Support SQL interface
+
 # Example
 ```rust
 use crate::core::data_type::ArrowType;
